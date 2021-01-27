@@ -2,6 +2,7 @@ PROGRESS_FILE=/tmp/dependancy_irobot_in_progress
 if [ ! -z $1 ]; then
 	PROGRESS_FILE=$1
 fi
+whoami
 touch ${PROGRESS_FILE}
 echo 0 > ${PROGRESS_FILE}
 echo "********************************************************"

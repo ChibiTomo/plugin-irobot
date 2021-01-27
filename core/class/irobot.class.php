@@ -146,6 +146,8 @@ class irobot extends eqLogic {
         $cmdSudo = system::getCmdSudo();
         
         log::add('irobot','error', 'Can find node and npm? ' . exec($cmdSudo . system::get('cmd_check') . '-E "npm|node" | wc -l'));
+        log::add('irobot','error', 'sudo whoami: ' . exec($cmdSudo . 'whoami'));
+        log::add('irobot','error', 'whoami: ' . exec('whoami'));
         if (exec($cmdSudo . system::get('cmd_check') . '-E "npm|node" | wc -l') < 2) {
             $return['state'] = 'nok';
         }
