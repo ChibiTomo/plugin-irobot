@@ -15,6 +15,7 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install node 2>&1
 echo 75 > ${PROGRESS_FILE}
+nvm use system
 npm uninstall -g dorita980 2>&1
 npm install -g dorita980 2>&1
 echo 100 > ${PROGRESS_FILE}
