@@ -148,17 +148,9 @@ class irobot extends eqLogic {
         if (exec($cmdSudo . system::get('cmd_check') . '-E "npm|node" | wc -l') < 2) {
             $return['state'] = 'nok';
         }
-        /*
-        if (exec($cmdSudo . 'pip3 list | grep -E "pyudev|pyserial|requests|bluepy" | wc -l') < 4) {
+        if (exec($cmdSudo . 'npm list -g | grep -E "dorita980" | wc -l') < 1) {
             $return['state'] = 'nok';
         }
-        if ($return['state'] == 'ok') {
-            $bluepyversion = exec($cmdSudo . "pip3 list --format=columns | grep bluepy | awk '{print $2}'");
-            if ($bluepyversion <> blea::$_bluepy_version){
-                log::add('blea','error', 'Bluepy not up to date : ' . $bluepyversion . ' expected ' . blea::$_bluepy_version);
-            }
-        }
-        */
         return $return;
     }
     

@@ -30,9 +30,12 @@ try {
   */  
     ajax::init();
 
+    $action = init('action');
+    switch($action) {
+        default:
+            throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . $action);
+    }
 
-
-    throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
     /*     * *********Catch exeption*************** */
 } catch (Exception $e) {
     ajax::error(displayException($e), $e->getCode());

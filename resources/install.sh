@@ -14,6 +14,8 @@ if [[ $NVM_DIR = "" ]]; then
 fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install node
+echo 75 > ${PROGRESS_FILE}
+npm install -g dorita980
 echo 100 > ${PROGRESS_FILE}
 echo "********************************************************"
 echo "*             Installation terminée                    *"
