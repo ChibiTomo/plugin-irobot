@@ -139,16 +139,18 @@ class irobot extends eqLogic {
 
     public static function dependancy_info() {
         $return = array();
-        $return['log'] = __CLASS__ . '_update';
+        $return['log'] = 'irobot_update';
         $return['progress_file'] = jeedom::getTmpFolder('irobot') . '/dependance';
         $return['state'] = 'ok';
         
-        if (exec(system::get('cmd_check') . '-E "npm|node" | wc -l') < 2) {
+        $cmdSudo = system::getCmdSudo();
+        
+        log::add('irobot','error', 'Can find node and npm? ' . exec($cmdSudo . system::get('cmd_check') . '-E "npm|node" | wc -l'));
+        if (exec($cmdSudo . system::get('cmd_check') . '-E "npm|node" | wc -l') < 2) {
             $return['state'] = 'nok';
         }
-        
-        log::add('irobot','error', 'Can find dorita980? ' . exec('npm list -g | grep -E "dorita980" | wc -l'));
-        if (exec('npm list -g | grep -E "dorita980" | wc -l') < 1) {
+        log::add('irobot','error', 'Can find dorita980? ' . exec($cmdSudo . 'npm list -g | grep -E "dorita980" | wc -l'));
+        if (exec($cmdSudo . 'npm list -g | grep -E "dorita980" | wc -l') < 1) {
             $return['state'] = 'nok';
         }
         return $return;
@@ -157,7 +159,7 @@ class irobot extends eqLogic {
     public static function dependancy_install() {
         log::remove(__CLASS__ . '_update');
         return array(
-            'script' => dirname(__FILE__) . '/../../resources/install.sh ' . jeedom::getTmpFolder('irobot') . '/dependance', 
+            'script' => system::getCmdSudo() . dirname(__FILE__) . '/../../resources/install.sh ' . jeedom::getTmpFolder('irobot') . '/dependance', 
             'log' => log::getPathToLog(__CLASS__ . '_update')
         );
     }
