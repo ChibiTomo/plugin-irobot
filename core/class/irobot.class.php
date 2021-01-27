@@ -146,8 +146,8 @@ class irobot extends eqLogic {
         if (exec(system::get('cmd_check') . '-E "npm|node" | wc -l') < 2) {
             $return['state'] = 'nok';
         }
-        log::add('irobot','error', 'Cannot find dorita980: ' . exec($cmdSudo . 'npm list -g | grep -E "dorita980" | wc -l'));
         if (exec('npm list -g | grep -E "dorita980" | wc -l') < 1) {
+            log::add('irobot','error', 'Cannot find dorita980: ' . exec('npm list -g | grep -E "dorita980" | wc -l'));
             $return['state'] = 'nok';
         }
         return $return;
