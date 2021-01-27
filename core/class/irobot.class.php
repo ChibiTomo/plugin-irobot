@@ -139,17 +139,15 @@ class irobot extends eqLogic {
 
     public static function dependancy_info() {
         $return = array();
-        $return['log'] = 'irobot_update';
+        $return['log'] = __CLASS__ . '_update';
         $return['progress_file'] = jeedom::getTmpFolder('irobot') . '/dependance';
         $return['state'] = 'ok';
         
-        $cmdSudo = system::getCmdSudo();
-        
-        if (exec($cmdSudo . system::get('cmd_check') . '-E "npm|node" | wc -l') < 2) {
+        if (exec(system::get('cmd_check') . '-E "npm|node" | wc -l') < 2) {
             $return['state'] = 'nok';
         }
         log::add('irobot','error', 'Cannot find dorita980: ' . exec($cmdSudo . 'npm list -g | grep -E "dorita980" | wc -l'));
-        if (exec($cmdSudo . 'npm list -g | grep -E "dorita980" | wc -l') < 1) {
+        if (exec('npm list -g | grep -E "dorita980" | wc -l') < 1) {
             $return['state'] = 'nok';
         }
         return $return;
