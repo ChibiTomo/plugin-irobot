@@ -159,7 +159,7 @@ class irobot extends eqLogic {
     public static function dependancy_install() {
         log::remove(__CLASS__ . '_update');
         return array(
-            'script' => system::getCmdSudo() . dirname(__FILE__) . '/../../resources/install.sh ' . jeedom::getTmpFolder('irobot') . '/dependance', 
+            'script' => dirname(__FILE__) . '/../../resources/install.sh ' . jeedom::getTmpFolder('irobot') . '/dependance', 
             'log' => log::getPathToLog(__CLASS__ . '_update')
         );
     }
