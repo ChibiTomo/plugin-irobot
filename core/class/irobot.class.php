@@ -145,7 +145,7 @@ class irobot extends eqLogic {
         
         $cmdSudo = system::getCmdSudo();
         
-        if (exec($cmdSudo . system::get('cmd_check') . '-E "npm" | wc -l') < 1) {
+        if (exec($cmdSudo . system::get('cmd_check') . '-E "npm|node" | wc -l') < 2) {
             $return['state'] = 'nok';
         }
         /*

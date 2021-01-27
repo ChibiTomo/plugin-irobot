@@ -7,9 +7,13 @@ echo 0 > ${PROGRESS_FILE}
 echo "********************************************************"
 echo "*             Installation des dépendances             *"
 echo "********************************************************"
-sudo apt-get update
+sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
 echo 50 > ${PROGRESS_FILE}
-sudo apt-get install -y nodejs
+if [[ $NVM_DIR = "" ]]; then
+    export NVM_DIR="$HOME/.nvm"
+fi
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm install node
 echo 100 > ${PROGRESS_FILE}
 echo "********************************************************"
 echo "*             Installation terminée                    *"
