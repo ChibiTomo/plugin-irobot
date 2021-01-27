@@ -25,7 +25,7 @@ class irobot extends eqLogic {
   /*
    * Permet de définir les possibilités de personnalisation du widget (en cas d'utilisation de la fonction 'toHtml' par exemple)
    * Tableau multidimensionnel - exemple: array('custom' => true, 'custom::layout' => false)
-	public static $_widgetPossibility = array();
+    public static $_widgetPossibility = array();
    */
     
     /*     * ***********************Methode static*************************** */
@@ -134,6 +134,41 @@ class irobot extends eqLogic {
     public static function preConfig_<Variable>() {
     }
      */
+    
+    
+
+    public static function dependancy_info() {
+        $return = array();
+        $return['log'] = 'irobot_update';
+        $return['progress_file'] = jeedom::getTmpFolder('irobot') . '/dependance';
+        $return['state'] = 'ok';
+        
+        $cmdSudo = system::getCmdSudo();
+        
+        if (exec($cmdSudo . system::get('cmd_check') . '-E "npm" | wc -l') < 1) {
+            $return['state'] = 'nok';
+        }
+        /*
+        if (exec($cmdSudo . 'pip3 list | grep -E "pyudev|pyserial|requests|bluepy" | wc -l') < 4) {
+            $return['state'] = 'nok';
+        }
+        if ($return['state'] == 'ok') {
+            $bluepyversion = exec($cmdSudo . "pip3 list --format=columns | grep bluepy | awk '{print $2}'");
+            if ($bluepyversion <> blea::$_bluepy_version){
+                log::add('blea','error', 'Bluepy not up to date : ' . $bluepyversion . ' expected ' . blea::$_bluepy_version);
+            }
+        }
+        */
+        return $return;
+    }
+    
+    public static function dependancy_install() {
+        log::remove(__CLASS__ . '_update');
+        return array(
+            'script' => dirname(__FILE__) . '/../../resources/install.sh ' . jeedom::getTmpFolder('irobot') . '/dependance', 
+            'log' => log::getPathToLog(__CLASS__ . '_update')
+        );
+    }
 
     /*     * **********************Getteur Setteur*************************** */
 }
