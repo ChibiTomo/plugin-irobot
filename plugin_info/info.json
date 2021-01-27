@@ -1,0 +1,23 @@
+{
+	"id" : "irobot",
+	"name" : "IRobot",
+	"description" : {
+		"fr_FR": "Plugin servant à contrôler n'importe quel Roomba",
+		"en_US": "Plugin to control any Roomba"
+	},
+	"licence" : "AGPL",
+	"author" : "ChibiTomo",
+	"require" : "4.1.18",
+	"category" : "devicecommunication",
+	"hasDependency" : true,
+	"hasOwnDeamon" : false,
+	"maxDependancyInstallTime" : 60,
+	"changelog" : "https://jeedom.github.io/plugin-template/#language#/changelog",
+	"documentation" : "https://github.com/ChibiTomo/plugin-irobot/wiki",
+	"link" : {
+		"forum":"Lien vers le forum",
+		"video" : "Lien vers une video"
+	},
+	"language" : ["fr_FR"],
+	"compatibility" : ["diy","v4"]
+}
