@@ -145,14 +145,16 @@ class irobot extends eqLogic {
         
         $cmdSudo = system::getCmdSudo();
         
-        log::add('irobot','error', 'Can find node and npm? ' . exec($cmdSudo . system::get('cmd_check') . '-E "npm|node" | wc -l'));
-        log::add('irobot','error', 'sudo whoami: ' . exec($cmdSudo . 'whoami'));
-        log::add('irobot','error', 'whoami: ' . exec('whoami'));
-        if (exec($cmdSudo . system::get('cmd_check') . '-E "npm|node" | wc -l') < 2) {
+        $retcode = 0;
+        exec($cmdSudo . 'node -v', null, $retcode)
+        if ($retcode != 0) {
             $return['state'] = 'nok';
         }
-        log::add('irobot','error', 'Can find dorita980? ' . exec($cmdSudo . 'npm list -g | grep -E "dorita980" | wc -l'));
-        if (exec($cmdSudo . 'npm list -g | grep -E "dorita980" | wc -l') < 1) {
+        exec($cmdSudo . 'npm -v', null, $retcode)
+        if ($retcode != 0) {
+            $return['state'] = 'nok';
+        }
+        if (exec($cmdSudo . 'npm list -g | grep -E "dorita980" | wc -l') === "") {
             $return['state'] = 'nok';
         }
         return $return;

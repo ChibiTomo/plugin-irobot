@@ -2,7 +2,7 @@ PROGRESS_FILE=/tmp/dependancy_irobot_in_progress
 if [ ! -z $1 ]; then
 	PROGRESS_FILE=$1
 fi
-whoami
+
 touch ${PROGRESS_FILE}
 echo 0 > ${PROGRESS_FILE}
 echo "********************************************************"
@@ -20,12 +20,12 @@ fi
 echo ""
 echo "--------- Installing NodeJS"
 echo ""
-nvm install node 2>&1
 echo 75 > ${PROGRESS_FILE}
 
 echo ""
 echo "--------- Checking for dorita980"
 echo ""
+
 if [[ $(npm list -g | grep -E "dorita980" | wc -l) < 1 ]]; then
     echo ""
     echo "--------- Installing dorita980"
